@@ -2,7 +2,7 @@
 <TilePane
         xmlns:fx="http://javafx.com/fxml"
         xmlns="http://javafx.com/javafx"
-        fx:controller="org.example.GameOfLifeController"
+        fx:controller="com.github.redawl.GameOfLife.GameOfLifeController"
         fx:id="container">
 
 </TilePane>

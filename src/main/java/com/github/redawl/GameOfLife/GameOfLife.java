@@ -1,10 +1,8 @@
-package org.example;
+package com.github.redawl.GameOfLife;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.TilePane;
 import javafx.stage.Stage;
 
@@ -12,8 +10,7 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Hello world!
- *
+ * Main class for the Game of Life
  */
 public class GameOfLife extends Application
 {
@@ -28,6 +25,11 @@ public class GameOfLife extends Application
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
+    /**
+     * Main entrypoint of the application
+     * @param args commandline arguments
+     */
     public static void main( String[] args )
     {
         launch(args);

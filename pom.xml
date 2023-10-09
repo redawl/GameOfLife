@@ -40,7 +40,7 @@
         <artifactId>javafx-maven-plugin</artifactId>
         <version>0.0.8</version>
         <configuration>
-          <mainClass>org.example.GameOfLife</mainClass>
+          <mainClass>com.github.redawl.GameOfLife.GameOfLife</mainClass>
         </configuration>
       </plugin>
       <plugin>

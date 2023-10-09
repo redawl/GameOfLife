@@ -1,10 +1,8 @@
-package org.example;
+package com.github.redawl.GameOfLife;
 
 import javafx.animation.AnimationTimer;
-import org.example.components.Cell;
+import com.github.redawl.GameOfLife.components.Cell;
 
-import java.time.LocalDate;
-import java.time.temporal.TemporalField;
 import java.util.List;
 
 public class BoardTimer extends AnimationTimer {
@@ -20,7 +18,7 @@ public class BoardTimer extends AnimationTimer {
 
     @Override
     public void handle(long time){
-        if(System.currentTimeMillis() - this.time > 300) {
+        if(System.currentTimeMillis() - this.time > 200) {
             // Compute
             for (List<Cell> row : gameBoard) {
                 for (Cell cell : row) {

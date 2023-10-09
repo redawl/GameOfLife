@@ -1,10 +1,10 @@
-package org.example;
+package com.github.redawl.GameOfLife;
 
+import com.github.redawl.GameOfLife.components.Cell;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.TilePane;
-import org.example.components.Cell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +18,9 @@ public class GameOfLifeController {
 
     private BoardTimer boardTimer;
 
-    private static final int xSize = 100;
-
     private static final int ySize = 100;
+
+    private static final int xSize = 100;
 
     private final AtomicBoolean timerActive = new AtomicBoolean(false);
 
@@ -29,21 +29,21 @@ public class GameOfLifeController {
     private void initialize() {
         // Create cells
         gameBoard = new ArrayList<>();
-        for(int x = 0; x < xSize; x++){
+        for(int y = 0; y < ySize; y++){
             gameBoard.add(new ArrayList<>());
-            for(int y = 0; y < ySize; y++){
-                gameBoard.get(x).add(Cell.createInstance(false));
+            for(int x = 0; x < xSize; x++){
+                gameBoard.get(y).add(Cell.createInstance(false));
             }
         }
 
         // Add neighbors
-        for(int x = 0; x < xSize; x++){
-            for(int y = 0; y < ySize; y++){
+        for(int x = 0; x < ySize; x++){
+            for(int y = 0; y < xSize; y++){
                 List<Cell> neighbors = new ArrayList<>();
 
                 for(int i = x - 1; i <= x + 1; i++){
                     for(int j = y - 1; j <= y + 1; j++){
-                        if(i >= 0 && j >= 0 && !(i == x && j == y) && i < xSize && j < ySize){
+                        if(i >= 0 && j >= 0 && !(i == x && j == y) && i < ySize && j < xSize){
                             neighbors.add(gameBoard.get(i).get(j));
                         }
                     }
