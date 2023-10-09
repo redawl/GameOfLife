@@ -1,0 +1,8 @@
+<?import javafx.scene.layout.TilePane?>
+<TilePane
+        xmlns:fx="http://javafx.com/fxml"
+        xmlns="http://javafx.com/javafx"
+        fx:controller="org.example.GameOfLifeController"
+        fx:id="container">
+
+</TilePane>
