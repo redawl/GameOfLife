@@ -1,20 +1,15 @@
-package com.github.redawl.GameOfLife.components;
+package com.github.redawl.gameoflife.components;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.github.redawl.gameoflife.Configuration;
 import javafx.scene.layout.Region;
 
 /**
  * Game of Life cell are represented by this class
  */
 public class Cell extends Region{
-
-    private static final String deadCss = "-fx-background-color: white";
-
-    private static final String aliveCss = "-fx-background-color: black";
-
-    private static final int size = 10;
     private List<Cell> neighbors;
     private boolean alive;
     private boolean newAlive;
@@ -27,17 +22,23 @@ public class Cell extends Region{
     private Cell() {
         super();
         setSize();
-        this.setOnMouseEntered(e -> this.setAlive());
+        this.setOnMouseEntered(e -> {
+            if (e.isShiftDown()) {
+                this.setAlive(true);
+            } else if (e.isControlDown()){
+                this.setAlive(false);
+            }
+        });
     }
 
     /**
      * Sets the size of the cell, by setting min and max height and width to the same value.
      */
     private void setSize(){
-        this.setMinHeight(Cell.size);
-        this.setMaxHeight(Cell.size);
-        this.setMinWidth(Cell.size);
-        this.setMaxWidth(Cell.size);
+        this.setMinHeight(Configuration.CELL_SIZE);
+        this.setMaxHeight(Configuration.CELL_SIZE);
+        this.setMinWidth(Configuration.CELL_SIZE);
+        this.setMaxWidth(Configuration.CELL_SIZE);
     }
 
     /**
@@ -66,7 +67,9 @@ public class Cell extends Region{
      * IMPORTANT: Does not update the state. In order to update the state, call {@code Cell.update()}
      */
     public void computeState(){
-        int aliveNeighbors = neighbors.stream().mapToInt(n -> n.alive ? 1 : 0).sum();
+        int aliveNeighbors = neighbors.stream()
+                .mapToInt(n -> n.alive ? 1 : 0)
+                .sum();
         if(alive && (aliveNeighbors >= 4 || aliveNeighbors <= 1)){
                 newAlive = false;
         } else if(!alive && (aliveNeighbors == 3)) {
@@ -77,18 +80,14 @@ public class Cell extends Region{
     public void update(){
         alive = newAlive;
         if(alive){
-            this.setStyle(aliveCss);
+            this.setStyle(Configuration.ALIVE_CSS);
         } else {
-            this.setStyle(deadCss);
+            this.setStyle(Configuration.DEAD_CSS);
         }
     }
 
-    public boolean isAlive(){
-        return alive;
-    }
-
-    private void setAlive(){
-        alive = !alive;
-        this.setStyle(alive ? aliveCss : deadCss);
+    private void setAlive(boolean alive){
+        this.alive = alive;
+        this.setStyle(alive ? Configuration.ALIVE_CSS : Configuration.DEAD_CSS);
     }
 }

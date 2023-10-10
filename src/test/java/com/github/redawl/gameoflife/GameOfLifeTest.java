@@ -1,4 +1,4 @@
-package com.github.redawl.GameOfLife;
+package com.github.redawl.gameoflife;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

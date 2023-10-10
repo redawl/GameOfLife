@@ -1,6 +1,7 @@
-package com.github.redawl.GameOfLife;
+package com.github.redawl.gameoflife;
 
-import com.github.redawl.GameOfLife.components.Cell;
+import com.github.redawl.gameoflife.components.Cell;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -11,19 +12,27 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameOfLifeController {
-    @FXML
     private TilePane container;
 
     private List<List<Cell>> gameBoard;
 
     private BoardTimer boardTimer;
-
     private static final int ySize = 100;
-
-    private static final int xSize = 100;
-
+    private static final int xSize = 150;
     private final AtomicBoolean timerActive = new AtomicBoolean(false);
 
+    private GameOfLifeController(TilePane container){
+        this.container = container;
+        initialize();
+    }
+
+    public static GameOfLifeController of(TilePane container){
+        return new GameOfLifeController(container);
+    }
+
+    public EventHandler<KeyEvent> getTimerController(){
+        return this::handleGlobalKeyPresses;
+    }
 
     @FXML
     private void initialize() {
@@ -54,8 +63,8 @@ public class GameOfLifeController {
         }
 
         // Init state
-        container.setPrefColumns(100);
-        container.setPrefRows(100);
+        container.setPrefColumns(xSize);
+        container.setPrefRows(ySize);
         container.setOnKeyPressed(e -> {
             System.out.println("On key pressed fired");
             if(e.getCode() == KeyCode.SPACE){
@@ -79,8 +88,6 @@ public class GameOfLifeController {
 
         // Init board timer
         this.boardTimer = new BoardTimer(gameBoard);
-
-        startTimer();
     }
 
     private void startTimer(){
@@ -93,7 +100,7 @@ public class GameOfLifeController {
         timerActive.set(false);
     }
 
-    public void toggleTimer(KeyEvent e){
+    public void handleGlobalKeyPresses(KeyEvent e){
         System.out.println("On key pressed fired");
         if(e.getCode() == KeyCode.SPACE){
             if(timerActive.get()){
@@ -101,6 +108,8 @@ public class GameOfLifeController {
             } else {
                 startTimer();
             }
+        } else if (e.getCode() == KeyCode.ESCAPE){
+            System.exit(0);
         }
     }
 }

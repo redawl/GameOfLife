@@ -1,8 +1,10 @@
 <?import javafx.scene.layout.TilePane?>
-<TilePane
-        xmlns:fx="http://javafx.com/fxml"
-        xmlns="http://javafx.com/javafx"
-        fx:controller="com.github.redawl.GameOfLife.GameOfLifeController"
-        fx:id="container">
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            xmlns="http://javafx.com/javafx">
+    <Text>Hello World</Text>
+    <TilePane fx:id="container">
 
-</TilePane>
+    </TilePane>
+</AnchorPane>
