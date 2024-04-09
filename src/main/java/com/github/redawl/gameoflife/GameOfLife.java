@@ -2,8 +2,8 @@ package com.github.redawl.gameoflife;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.TilePane;
@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Main class for the Game of Life
@@ -26,25 +27,24 @@ public class GameOfLife extends Application
         FXMLLoader loader = new FXMLLoader(url);
 
         AnchorPane page = loader.load();
-        TilePane game;
-        try {
-            game = (TilePane) page.getChildren().stream()
-                    .filter(node -> node instanceof TilePane)
-                    .findFirst()
-                    .orElseThrow(Exception::new);
-        } catch (Exception ex){
-            throw new RuntimeException("Wrong node was retrieved. ");
+        Optional<? extends Node> game;
+        game = page.getChildren().stream()
+                .filter(node -> node instanceof TilePane)
+                .findFirst();
+
+        if(game.isPresent() && game.get() instanceof TilePane) {
+            GameOfLifeController controller = GameOfLifeController.of((TilePane) game.get());
+            loader.setController(controller);
+            Scene scene = new Scene(page);
+            scene.addEventFilter(KeyEvent.KEY_PRESSED, controller.getTimerController());
+
+            primaryStage.setTitle("Game of Life");
+            primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
+            primaryStage.show();
+        } else {
+            throw new RuntimeException("Could not retrieve TilePane! " + game);
         }
-
-        GameOfLifeController controller = GameOfLifeController.of(game);
-        loader.setController(controller);
-        Scene scene = new Scene(page);
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, controller.getTimerController());
-
-        primaryStage.setTitle("Game of Life");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
     }
 
     /**
