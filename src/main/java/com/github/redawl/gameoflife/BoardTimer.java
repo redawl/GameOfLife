@@ -10,8 +10,6 @@ public class BoardTimer extends AnimationTimer {
 
     private long time;
 
-    private long intervalInMillis = (long)(Configuration.TIMER_INTERVAL * 1000);
-
     public BoardTimer(List<List<Cell>> gameBoard){
         super();
         this.gameBoard = gameBoard;
@@ -26,7 +24,7 @@ public class BoardTimer extends AnimationTimer {
 
     @Override
     public void handle(long time){
-        if(System.currentTimeMillis() - this.time > intervalInMillis) {
+        if(System.currentTimeMillis() - this.time > Configuration.TIMER_INTERVAL) {
             // Compute
             for (List<Cell> row : gameBoard) {
                 for (Cell cell : row) {

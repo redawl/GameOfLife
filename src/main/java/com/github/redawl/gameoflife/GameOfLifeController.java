@@ -12,9 +12,7 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class GameOfLifeController {
-    private TilePane container;
-
-    private List<List<Cell>> gameBoard;
+    private final TilePane container;
 
     private BoardTimer boardTimer;
     private static final int ySize = 100;
@@ -37,7 +35,7 @@ public class GameOfLifeController {
     @FXML
     private void initialize() {
         // Create cells
-        gameBoard = new ArrayList<>();
+        List<List<Cell>> gameBoard = new ArrayList<>();
         for(int y = 0; y < ySize; y++){
             gameBoard.add(new ArrayList<>());
             for(int x = 0; x < xSize; x++){

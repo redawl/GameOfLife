@@ -7,7 +7,7 @@ public class Configuration {
     public static final String ALIVE_CSS = "-fx-background-color: #5200BD";
 
     // Timer Configs
-    public static final double TIMER_INTERVAL = .05;
+    public static final double TIMER_INTERVAL = .05 * 1000;
 
     // Board Configs
     /**

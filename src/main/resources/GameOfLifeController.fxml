@@ -3,7 +3,7 @@
 <?import javafx.scene.text.Text?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             xmlns="http://javafx.com/javafx">
-    <Text>Hello World</Text>
+    <Text>Game of Life</Text>
     <TilePane fx:id="container">
 
     </TilePane>
